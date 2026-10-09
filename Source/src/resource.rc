@@ -1,0 +1,109 @@
+// Resources. Dialog layouts match the original Desktop Restore 1.7 dialogs.
+#include <windows.h>
+#include "resource.h"
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+IDI_APP ICON "app.ico"
+1 24 "app.manifest"
+
+IDD_CUSTOM DIALOGEX 0, 0, 255, 237
+STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Custom Layout Save/Restore"
+FONT 8, "MS Shell Dlg", 400, 0, 1
+BEGIN
+    LTEXT           "Current Monitor Resolution:", -1, 6, 4, 120, 8
+    EDITTEXT        IDC_CURRENT, 6, 15, 188, 12, ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Save: Choose a layout to overwrite, or name a new one.\nRestore: Choose an existing layout to restore.\nDelete: Choose an existing layout to remove.", -1, 8, 29, 186, 25
+    PUSHBUTTON      "S&ave to File...", IDC_SAVEFILE, 6, 57, 70, 14
+    PUSHBUTTON      "Restore &from File...", IDC_RESTOREFILE, 78, 57, 70, 14
+    COMBOBOX        IDC_LAYOUTS, 7, 75, 241, 121, CBS_SIMPLE | CBS_SORT | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "For Multi-Monitor layouts, the asterisk (*) indicates the primary Monitor", -1, 7, 199, 241, 8
+    CONTROL         "", -1, "Static", SS_ETCHEDHORZ, 7, 218, 241, 1
+    LTEXT           "", IDC_VERSION, 7, 222, 241, 8
+    PUSHBUTTON      "&Save", IDC_SAVE, 198, 7, 50, 14
+    PUSHBUTTON      "&Restore", IDC_RESTORE, 198, 21, 50, 14
+    PUSHBUTTON      "&Delete", IDC_DELETE, 198, 35, 50, 14
+    PUSHBUTTON      "Close", IDCANCEL, 198, 57, 50, 14
+END
+
+IDD_SETTINGS DIALOGEX 0, 0, 217, 212
+STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Desktop Restore Settings"
+FONT 8, "MS Shell Dlg", 400, 0, 1
+BEGIN
+    GROUPBOX        "Save Desktop Command", -1, 7, 4, 201, 40
+    AUTORADIOBUTTON "Host in cascade menu", IDC_SAVE_CASCADE, 21, 16, 90, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "Host in main menu", IDC_SAVE_MAIN, 21, 30, 90, 10
+    AUTOCHECKBOX    "Ask for confirmation", IDC_CONFIRM_SAVE, 122, 16, 82, 10, WS_GROUP | WS_TABSTOP
+    GROUPBOX        "Restore Desktop Command", -1, 7, 46, 201, 40
+    AUTORADIOBUTTON "Host in cascade menu", IDC_REST_CASCADE, 21, 58, 90, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "Host in main menu", IDC_REST_MAIN, 21, 72, 90, 10
+    AUTOCHECKBOX    "Ask for confirmation", IDC_CONFIRM_REST, 122, 58, 82, 10, WS_GROUP | WS_TABSTOP
+    GROUPBOX        "Custom Save/Restore Command", -1, 7, 88, 201, 40
+    AUTORADIOBUTTON "Host in cascade menu", IDC_CUST_CASCADE, 21, 100, 90, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "Host in main menu", IDC_CUST_MAIN, 21, 114, 90, 10
+    GROUPBOX        "Highlight unmatched icons Command", -1, 7, 130, 201, 40
+    AUTORADIOBUTTON "Host in cascade menu", IDC_HILI_CASCADE, 21, 142, 90, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "Host in main menu", IDC_HILI_MAIN, 21, 156, 90, 10
+    AUTOCHECKBOX    "Force unmatched Icons to be visible after Restore.", IDC_FORCE_VISIBLE, 7, 173, 201, 10, WS_GROUP | WS_TABSTOP
+    DEFPUSHBUTTON   "OK", IDOK, 103, 191, 50, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 157, 191, 50, 14
+END
+
+STRINGTABLE
+BEGIN
+    IDS_MENU_SAVE       "Sa&ve Desktop"
+    IDS_MENU_RESTORE    "Restore &Desktop"
+    IDS_CAPTION         "Desktop Save and Restore"
+    IDS_NO_LISTVIEW     "Couldn't find desktop ListView"
+    IDS_NO_ICON_INFO    "No Icon Information Stored in Layout:\n%ls"
+    IDS_CONFIRM_SAVE    "Save Icon Locations for\n%ls ?"
+    IDS_MENU_CUSTOM     "C&ustom Save/Restore..."
+    IDS_CONFIRM_DELETE  "Delete Layout:\n%ls ?"
+    IDS_VERSION_LINE    "Desktop Restore %ls. Original by Jamie O'Connell"
+    IDS_APP_TITLE       "Desktop Restore"
+    IDS_MENU_HILITE     "Highlight Unmatched Icons"
+    IDS_MENU_SETTINGS   "Settings..."
+    IDS_CONFIRM_RESTORE "Restore Icon Locations from\n%ls ?"
+    IDS_AUTO_ARRANGE    "Auto arrange icons is turned on, so Windows would move the icons right back.\n\nTurn it off and restore the layout?"
+    IDS_ALL_MATCHED     "All desktop icons are in the saved layout:\n%ls"
+    IDS_ASK_INSTALL     "Add Desktop Restore to the desktop right-click menu?\n\nThe menu will run this copy:\n%ls\n\nIf this is a temporary location, move the program to a permanent folder first."
+    IDS_INSTALLED       "Desktop Restore is now in the desktop right-click menu.\n\nOn Windows 11, right-click the desktop and choose Show more options.\n\nTo remove it, use Settings > Apps > Installed apps, or run DesktopRestore.exe /uninstall."
+    IDS_UNINSTALLED     "The Desktop Restore menu was removed. Your saved layouts were kept.\n\nYou can delete DesktopRestore.exe now."
+    IDS_USAGE           "DesktopRestore.exe [command] [/q]\n\n/save [layout]\tSave the desktop (current resolution or a named layout)\n/restore [layout]\tRestore the desktop\n/custom\t\tCustom Save/Restore dialog\n/highlight\t\tHighlight unmatched icons\n/settings\t\tSettings\n/savefile file.dtr\tSave to a layout file\n/restorefile file.dtr\tRestore from a layout file\n/install\t\tAdd the desktop right-click menu\n/uninstall\t\tRemove the menu (layouts are kept)\n/diag [file]\t\tWrite a troubleshooting report (changes nothing)\n/q\t\tNo prompts or messages\n\nDesktopCmd syntax also works:\nsave | restore | query  [/n ""Layout"" | /f ""file.dtr""]  [/y]\n\nWith no command it offers to add the menu if needed, otherwise opens Custom Save/Restore.\nExit codes: 0 done, 1 failed or cancelled, 2 bad command line, 3 already running."
+    IDS_FILE_ERROR      "Couldn't write the layout file:\n%ls"
+    IDS_SAVE_ERROR      "Couldn't save the layout:\n%ls"
+    IDS_MENU_ERROR      "Couldn't add the menu entries to the registry."
+    IDS_NOTHING_SAVED   "No desktop icons could be read, so nothing was saved.\n\nIf Explorer was just restarted, wait a moment and try again."
+    IDS_UNINSTALL_ERROR "Couldn't remove all Desktop Restore menu entries from the registry."
+    IDS_AUTO_ARRANGE_ON "Auto arrange icons could not be turned off, so nothing was restored.\n\nRight-click the desktop, choose View, turn off Auto arrange icons, then restore again."
+END
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,7,2,2
+ PRODUCTVERSION 1,7,2,2
+ FILEFLAGSMASK 0x3fL
+ FILEFLAGS 0x0L
+ FILEOS VOS_NT_WINDOWS32
+ FILETYPE VFT_APP
+ FILESUBTYPE VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "Desktop Restore (desktop icon layout save and restore)"
+            VALUE "FileVersion", "1.7.2 port r2"
+            VALUE "InternalName", "DesktopRestore"
+            VALUE "OriginalFilename", "DesktopRestore.exe"
+            VALUE "ProductName", "Desktop Restore, standalone port"
+            VALUE "ProductVersion", "1.7.2 port r2"
+            VALUE "Comments", "Independent re-implementation of Desktop Restore 1.7.2 by Jamie O'Connell (midiox.com), compatible with its layouts."
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
